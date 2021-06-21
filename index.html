@@ -23,16 +23,16 @@
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+        <li><a href="#" class="nav-link px-2 link-secondary" id="allStudentMenu">ชื่อนักศึกษาทั้งหมด</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark" id="searchMenu">ค้นหา</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark" id="addStudentMenu">เพิ่มนักศึกษา</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark" id="editStudentMenu">แก้ไข</a></li>
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
         <input type="search" class="form-control" placeholder="Search..." aria-label="Search" id="inputText">
       </form>
-      <button type="button" class="btn btn-light text-dark me-2" id="searchButton">Login</button>
+      <button type="button" class="btn btn-light text-dark me-2" id="searchButton">Search</button>
       <button type="button" class="btn btn-primary">
         กดมาแล้ว <span class="badge bg-danger" id="count">4</span>
       </button>
@@ -53,42 +53,37 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center my-3">
+  
+  <div id="addUserDetail">
+  <div class="d-flex justify-content-center my-3" >
     <form class="row gy-2 gx-3 align-items-center">
-      <div class="col-auto">
-        <label class="visually-hidden" for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Jane Doe">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="nameInput" placeholder="ชื่อ">
+        <label for="nameInput" id="labelName">Name</label>
       </div>
-      <div class="col-auto">
-        <label class="visually-hidden" for="username">Username</label>
-        <div class="input-group">
-          <div class="input-group-text">@</div>
-          <input type="text" class="form-control" id="username" placeholder="Username">
-        </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="surnameInput" placeholder="นามสกุล">
+        <label for="surnameInput">Surname</label>
       </div>
-      <div class="col-auto">
-        <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-        <select class="form-select" id="namePrefix">
-          <option selected>Choose...</option>
-          <option value="1">นาย</option>
-          <option value="2">นาง</option>
-          <option value="3">นางสาว</option>
-        </select>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="studentIdInput" placeholder="รหัสนักศึกษา">
+        <label for="studentIdInput">รหัสนักศึกษา</label>
       </div>
-      <div class="col-auto">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-          <label class="form-check-label" for="autoSizingCheck">
-            Remember me
-          </label>
-        </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="gpaInput" placeholder="gpa">
+        <label for="gpaInput">GPA</label>
       </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-primary" id="submitData">Submit</button>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="imageLinkInput" placeholder="image Link">
+        <label for="imageLinkInput">Link รูป</label>
+      </div>
+      <div class="col-auto" id="addBtn">
+        <button type="button" class="btn btn-primary" id="addButton">Submit</button>
       </div>
     </form>
   </div>
-  
+  </div>
+
   <div id="output" class="px-5">
     <table class="table table-hover">
       <thead>
@@ -96,14 +91,96 @@
           <th scope="col">#</th>
           <th scope="col">ชื่อ</th>
           <th scope="col">รหัส</th>
-          <th scope="col">เพศ</th>
+          <th scope="col">gpa</th>
+          <th scope="col">ลบ</th>
+          <th scope="col">แก้ไข</th>
         </tr>
       </thead>
       <tbody id="tableBody">
       </tbody>
     </table>
   </div>
- 
+
+  <div id="edit_student_result">
+    <div class="px-3 m-5">
+        <div class="row">
+            <div class="col-3"><b>Id:</b></div>
+            <div class="col-3" id="editid"></div>
+        </div>
+        <div class="row">
+            <div class="col-3"><b>Student Id:</b></div>
+            <div class="col-3" id="editstudentId"></div>
+        </div>
+        <div class="row">
+            <div class="col-3"><b>Name:</b></div>
+            <div class="col-3" id="editname"></div>
+        </div>
+        <div class="row">
+            <div class="col-3"><b>GPA:</b></div>
+            <div class="col-3" id="editgpa"></div>
+        </div>
+        <div class="row">
+            <div class="col-3"><b>Image:</b></div>
+            <div class="col-3" id="editid">
+                <img src="/" alt="default image" id="editimage" />
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+        <form class="row gy-2 gx-3 align-items-center">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editnameInput" placeholder="Name">
+                <label for="editnameInput">Name</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editsurnameInput" placeholder="Name">
+                <label for="editsurnameInput">Surname</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editstudentIdInput" placeholder="Name">
+                <label for="editstudentIdInput">Student ID</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editgpaInput" placeholder="Name">
+                <label for="editgpaInput">GPA</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editimageLinkInput" placeholder="Name">
+                <label for="editimageLinkInput">Image Link</label>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" id="editButton">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+  <div id="single_student_result" class="px-3 m-5">
+    <div class="row">
+      <div class="col-3"><b>Id:</b></div>
+      <div class="col-3" id="id">id</div>
+    </div>
+    <div class="row">
+      <div class="col-3"><b>Student id:</b></div>
+      <div class="col-3" id="studentId">id</div>
+    </div>
+    <div class="row">
+      <div class="col-3"><b>Name:</b></div>
+      <div class="col-3" id="name">name and surname</div>
+    </div>
+    <div class="row">
+      <div class="col-3"><b>GPA:</b></div>
+      <div class="col-3" id="gpa">gpa</div>
+    </div>
+    <div class="row">
+      <div class="col-3"><b>Image:</b></div>
+      <div class="col">
+        <img src="asset/images/default.jpg" alt="default image" id="image" />
+      </div>
+    </div>
+  </div>
+
 
   <!-- Optional JavaScript; choose one of the two! -->
 
